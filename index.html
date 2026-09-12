@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>积分照片墙</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0f1115; color:#e8eaed;
+         font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; }
+  header { padding:22px 18px 6px; max-width:1200px; margin:0 auto; }
+  h1 { margin:0; font-size:20px; }
+  .sub { color:#8b949e; font-size:13px; margin:6px 0 0; }
+  .grid { max-width:1200px; margin:0 auto; padding:16px 18px 40px;
+          column-count:4; column-gap:12px; }
+  @media (max-width:1000px){ .grid{column-count:3;} }
+  @media (max-width:700px){ .grid{column-count:2;} }
+  .item { break-inside:avoid; margin:0 0 12px; border-radius:12px; overflow:hidden;
+          background:#161b22; }
+  .item img { width:100%; display:block; }
+  .meta { padding:8px 10px; font-size:12px; color:#8b949e; }
+  .empty { max-width:1200px; margin:0 auto; padding:40px 18px; color:#8b949e; }
+</style>
+</head>
+<body>
+<header>
+  <h1>积分照片墙</h1>
+  <p class="sub" id="sub">加载中…</p>
+</header>
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" style="display:none">还没有图片。</div>
+<script>
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+async function load(){
+  try{
+    const r = await fetch("images.json?_=" + Date.now(), {cache:"no-store"});
+    const d = await r.json();
+    const items = d.items || [];
+    document.getElementById("sub").textContent =
+      "共 " + items.length + " 张 · 更新于 " + (d.updated_at_text || "-");
+    const grid = document.getElementById("grid");
+    if(!items.length){ document.getElementById("empty").style.display="block"; return; }
+    grid.innerHTML = items.map(function(it){
+      return '<div class="item"><a href="'+esc(it.url)+'" target="_blank" rel="noopener">'+
+             '<img loading="lazy" src="'+esc(it.thumb||it.url)+'" alt=""></a>'+
+             '<div class="meta">'+esc(it.owner||"匿名")+' · ❤ '+ (it.likes||0) +'</div></div>';
+    }).join("");
+  }catch(e){
+    document.getElementById("sub").textContent = "读取失败：" + e;
+  }
+}
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>
