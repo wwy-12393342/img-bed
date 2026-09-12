@@ -1,0 +1,15 @@
+{
+  "title": "积分照片墙",
+  "updated_at": 1789229697,
+  "updated_at_text": "2026-09-13 00:14:57",
+  "count": 1,
+  "items": [
+    {
+      "id": "t1",
+      "url": "https://cdn.jsdelivr.net/gh/wwy-12393342/img-bed@main/images/_selftest_wall.png",
+      "owner": "测试",
+      "likes": 3,
+      "created_at": 0
+    }
+  ]
+}
