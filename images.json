@@ -1,9 +1,16 @@
 {
   "title": "积分照片墙",
-  "updated_at": 1789231286,
-  "updated_at_text": "2026-09-13 00:41:26",
-  "count": 24,
+  "updated_at": 1789231898,
+  "updated_at_text": "2026-09-13 00:51:38",
+  "count": 25,
   "items": [
+    {
+      "id": "f4fd86b3",
+      "url": "https://cdn.jsdelivr.net/gh/wwy-12393342/img-bed@main/images/points_1187405_1789231894.png",
+      "owner": "",
+      "likes": 0,
+      "created_at": 1789231897.5547106
+    },
     {
       "id": "meme_1789192850709.png",
       "url": "https://cdn.jsdelivr.net/gh/wwy-12393342/img-bed@main/images/meme_1789192850709.png",
